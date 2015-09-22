@@ -23,23 +23,31 @@ error_type = sys.argv[1]
 if error_type == "assertion":
     raise AssertionError
 elif error_type == "io":
-    raise IOError
+    name = "/doesntexist.txt"
+    with open(name) as f:
+        print(f.readline())
 elif error_type == "import":
-    raise ImportError
+    from dog import cat
 elif error_type == "index":
-    raise IndexError
+    a=[1.2]
+    print a[33]
 elif error_type == "key":
-    raise KeyError
+    d = {'1' : 'a', '4' : 'b', '5' : 'c'}
+    x = d['2']
 elif error_type == "name":
-    raise NameError
+    print cat
 elif error_type == "os":
-    raise OSError
+    import os
+    os.mkdir('szip')
 elif error_type == "type":
-    raise TypeError
+    x = 2
+    y = 'blahblah'
+    z = x+y
 elif error_type == "value":
-    raise ValueError
+    x = int('x')
+    
 elif error_type == "zerodivision":
-    raise ZeroDivisionError
+    print(1/0)
 else:
     sys.stderr.write("Sorry, not able to throw a(n) ")
     sys.stderr.write(error_type + " error\n")
