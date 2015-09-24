@@ -5,13 +5,18 @@
 
 import sys
 
+class JasminError(Exception):
+    pass
+class Correct(Exception):
+    pass
+
 def print_usage():
     """Print usage and exit"""
     sys.stderr.write("usage: python raise_err.py <error type>\n")
     sys.stderr.write("available errors: \n")
     sys.stderr.write("\tassertion, io, import, index\n")
     sys.stderr.write("\tkey, name, os, type, value,\n")
-    sys.stderr.write("\tzerodivision\n")
+    sys.stderr.write("\tzerodivision, overflow\n")
     sys.exit()
 
 # Check args
@@ -21,7 +26,15 @@ if len(sys.argv) != 2:
 error_type = sys.argv[1]
 
 if error_type == "assertion":
-    raise AssertionError
+    assert(0 == 2)
+elif error_type == "jasmin":
+    science = "laaaaaammmmmeee" 
+    if science == "cool":
+        raise Correct
+    if science != "cool":
+        raise JasminError
+#I could use this in a script for screening people for possible friendship. I could have a question after an insert prompt that says "If you study science, believe your life has benefitted from scientific advancement, or generally enjoy gaining knowledge in scientific fields enter  "cool", if you actively dislike science for any reason, enter anything else." Then, JasminError would be raised. 
+    
 elif error_type == "io":
     name = "/doesntexist.txt"
     with open(name) as f:
@@ -48,6 +61,10 @@ elif error_type == "value":
     
 elif error_type == "zerodivision":
     print(1/0)
+elif error_type == "overflow":
+    k = 256
+    (4./(8.*k+1.) - 2./(8.*k+4.) - 1./(8.*k+5.) - 1./(8.*k+6.)) / 16.**k
+
 else:
     sys.stderr.write("Sorry, not able to throw a(n) ")
     sys.stderr.write(error_type + " error\n")
