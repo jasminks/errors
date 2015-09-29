@@ -4,26 +4,19 @@
 # user-supplied command line argument
 
 import sys
+import argparse
+
+available_errors= ["assertion","jasmin","io","import","index","key","name","os","type","value","zerodivision","overflow"]
+parser = argparse.ArgumentParser()
+parser.add_argument("error_type",
+                   choices=available_errors)
+args = parser.parse_args()
+error_type = args.error_type
 
 class JasminError(Exception):
     pass
 class Correct(Exception):
     pass
-
-def print_usage():
-    """Print usage and exit"""
-    sys.stderr.write("usage: python raise_err.py <error type>\n")
-    sys.stderr.write("available errors: \n")
-    sys.stderr.write("\jasmin, tassertion, io, import, index\n")
-    sys.stderr.write("\tkey, name, os, type, value,\n")
-    sys.stderr.write("\tzerodivision, overflow\n")
-    sys.exit()
-
-# Check args
-if len(sys.argv) != 2:
-    print_usage()
-
-error_type = sys.argv[1]
 
 if error_type == "assertion":
     assert(0 == 2)
