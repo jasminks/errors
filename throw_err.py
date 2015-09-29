@@ -14,7 +14,7 @@ def print_usage():
     """Print usage and exit"""
     sys.stderr.write("usage: python raise_err.py <error type>\n")
     sys.stderr.write("available errors: \n")
-    sys.stderr.write("\tassertion, io, import, index\n")
+    sys.stderr.write("\jasmin, tassertion, io, import, index\n")
     sys.stderr.write("\tkey, name, os, type, value,\n")
     sys.stderr.write("\tzerodivision, overflow\n")
     sys.exit()
